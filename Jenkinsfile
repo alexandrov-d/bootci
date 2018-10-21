@@ -3,4 +3,7 @@ node('master') {
     stage('say-hello') {
         sh "echo 'hello world DIma'"
     }
+    stage('build') {
+        mvn package
+    }
 }
