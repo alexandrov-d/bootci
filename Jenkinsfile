@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 node('master') {
-    stage('say-hello') {
+    stage('say-something') {
         sh "echo 'hello world DIma'"
     }
     stage('build') {
