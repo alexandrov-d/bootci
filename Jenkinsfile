@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+
 node('master') {
     stage('build') {
         git url: 'https://github.com/alexandrov-d/bootci.git'
