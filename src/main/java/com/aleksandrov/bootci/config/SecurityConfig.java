@@ -1,4 +1,4 @@
-package com.aleksandrov.bootci;
+package com.aleksandrov.bootci.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
