@@ -1,0 +1,46 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aleksandrovdigi/smart8:server-0.7.10
+    volumes:
+     - .:/home/smart8
+    links:
+    - redis
+    - elasticsearch
+    ports:
+    - "8088:8088"
+    - "9696:9696"
+#    environment:
+    #- PROFILE=aleksandrov
+    #- PROFILE=stage
+    #- PROFILE=production
+    networks:
+     - smart8-net
+  redis:
+    image: redis:4.0.11-alpine
+    ports:
+    - "6379:6379"
+    volumes:
+     - /usr/lib/redis:/data
+    networks:
+    - smart8-net
+  elasticsearch:
+    build:
+      context: ./docker/elasticsearch
+      dockerfile: Dockerfile
+    image: aleksandrovdigi/smart8:elastic-6.4.2
+    environment:
+    - cluster.name=elasticsearch
+    ports:
+    - "9200:9200"
+    volumes:
+    - /home/aleksandrovd/Work/temp/smart8/elasticsearch:/usr/share/elasticsearch/data
+    - /home/aleksandrovd/Work/temp/smart8/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+    - smart8-net
+networks:
+  smart8-net:
+    driver: "bridge"
